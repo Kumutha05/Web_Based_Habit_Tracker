@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Habit Tracker - Welcome</title>
+  <style>
+    body {
+      font-family: 'Times New Roman';
+      text-align: center;
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(270deg, #89f7fe, #66a6ff);
+      background-size: 400% 400%;
+      animation: gradientShift 10s ease infinite;
+    }
+
+    @keyframes gradientShift {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
+    #welcomeLine {
+      font-size: 36px;
+      font-weight: bold;
+      color: #222;
+    }
+
+    .word {
+      opacity: 0;
+      display: inline-block;
+      margin-right: 6px;
+      transition: opacity 0.8s ease-in;
+    }
+
+    .word.show {
+      opacity: 1;
+    }
+
+    /* Image container */
+    #picContainer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    #homepagePic {
+      display: none;
+      width: 350px;
+      padding: 20px;               /* space around image */
+      background:#2c7a7b;           /* background color */
+      border-radius: 20px;         /* rounded corners */
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* shadow effect */
+      transform: scale(0.8);
+      opacity: 0;
+      transition: all 1.5s ease;
+    }
+
+    #homepagePic.show {
+      display: block;
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    #beginText {
+      margin-top: 20px;
+      font-size: 24px;
+      font-weight: bold;
+      color: #fff;
+      background: #2c7a7b;
+      padding: 12px 30px;
+      border-radius: 25px;
+      cursor: pointer;
+      border: none;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 1s ease;
+      box-shadow: 0 0 15px rgba(0,255,200,0.7);
+    }
+
+    #beginText.show {
+      opacity: 1;
+      transform: translateY(0);
+      animation: glow 1.5s infinite alternate;
+    }
+
+    @keyframes glow {
+      from { box-shadow: 0 0 10px #2c7a7b, 0 0 20px #2c7a7b; }
+      to { box-shadow: 0 0 25px #00ffcc, 0 0 50px #00ffcc; }
+    }
+
+    #beginText:hover {
+      background: #00bfa6;
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body>
+
+   <!-- Words appear one by one in the same line -->
+   <div id="welcomeLine">
+     <span class="word">Welcome</span>
+     <span class="word">to</span>
+     <span class="word">Habit</span>
+     <span class="word">Tracker</span>
+   </div>
+
+   <!-- Image inside a background container -->
+   <div id="picContainer">
+     <img id="homepagePic" src="design.png" alt="Home Page">
+   </div>
+
+   <!-- Go to tracker.html -->
+   <button id="beginText" onclick="window.location.href='tracker.html'">Let's Start</button>
+
+  <script>
+    const words = document.querySelectorAll(".word");
+
+    // Show each word one by one
+    words.forEach((word, index) => {
+      setTimeout(() => {
+        word.classList.add("show");
+      }, index * 1000);
+    });
+
+    // Show image after words
+    setTimeout(() => {
+      document.getElementById("homepagePic").classList.add("show");
+    }, words.length * 1000 + 500);
+
+    // Show button
+    setTimeout(() => {
+      document.getElementById("beginText").classList.add("show");
+    }, words.length * 1000 + 2000);
+  </script>
+</body>
+</html>
